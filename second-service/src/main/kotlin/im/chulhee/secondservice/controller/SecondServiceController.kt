@@ -8,15 +8,22 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/second-service")
+
 class SecondServiceController {
     private val logger = LoggerFactory.getLogger(SecondServiceController::class.java)
 
     @GetMapping("/welcome")
     fun welcome(
         @RequestHeader("X-service-request") requestFrom: String
-    ) : String {
+    ): String {
         logger.info("RequestFrom : $requestFrom")
         return "welcome to second service!"
     }
+
+    @GetMapping("/check")
+    fun check(): String {
+        return "check second service"
+    }
+
 
 }

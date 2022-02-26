@@ -9,7 +9,14 @@ import org.springframework.web.bind.annotation.RestController
 class FirstController {
 
     @GetMapping("/welcome")
-    fun welcome() : String {
+    fun welcome(): String {
         return "welcome to first service!"
     }
+
+
+    @GetMapping("/check")
+    fun check(): String {
+        return "check first service"
+    }
+
 }
