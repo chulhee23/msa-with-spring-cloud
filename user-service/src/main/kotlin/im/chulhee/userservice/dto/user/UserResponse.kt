@@ -13,7 +13,7 @@ data class UserResponse(
     companion object {
         fun from(user: User): UserResponse {
             return UserResponse(
-                userId = user.userId,
+                userId = user.userId.toString(),
                 email = user.email,
                 name = user.name,
                 phone = user.phone,

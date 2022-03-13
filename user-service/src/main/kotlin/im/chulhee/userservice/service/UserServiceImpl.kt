@@ -5,21 +5,22 @@ import im.chulhee.userservice.dto.user.UserResponse
 import im.chulhee.userservice.entity.User
 import im.chulhee.userservice.generator.UserIdGenerator
 import im.chulhee.userservice.repository.UserRepository
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class UserSerciceImpl(
-    private val userRepository: UserRepository
+class UserServiceImpl(
+    private val userRepository: UserRepository,
+    private val passwordEncoder: BCryptPasswordEncoder,
 ) : UserService {
 
     @Transactional
     override fun createUser(userDto: UserDto): UserResponse {
         userDto.setUserId()
         val user = User.from(userDto)
-        user.encryptedPassword = "encrypted"
+        user.encryptedPassword = passwordEncoder.encode(userDto.password)
         val saved = userRepository.save(user)
-
 
         return UserResponse.from(saved)
     }

@@ -8,7 +8,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "users")
 class User(
-
     @Column
     var userId: String = "",
 
@@ -22,6 +21,7 @@ class User(
     @Column
     var phone: String = "010-0000-0000",
 ) : BaseTimeEntity() {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

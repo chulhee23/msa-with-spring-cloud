@@ -29,6 +29,7 @@ object UserIdGenerator {
         } else {
             sequenceId++
         }
+
         return "$sign$timestamp$dataCenterId$serverId${sequenceId.toBinaryString()}"
     }
 
