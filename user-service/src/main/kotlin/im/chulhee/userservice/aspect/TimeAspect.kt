@@ -1,6 +1,5 @@
 package im.chulhee.userservice.aspect
 
-import lombok.extern.slf4j.Slf4j
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -11,7 +10,6 @@ import kotlin.system.measureTimeMillis
 
 @Component
 @Aspect
-@Slf4j
 class TimeAspect {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
@@ -25,7 +23,7 @@ class TimeAspect {
         val className = joinPoint.target.javaClass.name.substringAfterLast(".")
         val methodName = joinPoint.signature.name
 
-        logger.info("Time : $className $methodName elapsed : ${elapsed / 1000F} seconds")
+        logger.info("Time : $className $methodName elapsed : $elapsed ms")
         return result
 
     }

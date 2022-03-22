@@ -1,5 +1,6 @@
 package im.chulhee.userservice.controller
 
+import im.chulhee.userservice.config.ApiPath
 import im.chulhee.userservice.dto.user.UserDto
 import im.chulhee.userservice.dto.user.UserRequest
 import im.chulhee.userservice.dto.user.UserResponse
@@ -9,27 +10,27 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("${ApiPath.ROOT}/users")
 class UserController(
-    private val userService: UserService
+    private val userService: UserService,
 ) {
 
-    @RequestMapping
-    fun test(): String {
-        return "ok"
+    @GetMapping
+    fun list(): ResponseEntity<List<UserResponse>> {
+        return ResponseEntity(userService.findAll(), HttpStatus.OK)
     }
 
-    @GetMapping("/health_check")
-    fun checkStatus(): String {
-        return "ok"
+    @GetMapping("/{userId}")
+    fun getUser(
+        @PathVariable userId: Long,
+    ): ResponseEntity<UserResponse> {
+        return ResponseEntity(userService.getUser(userId), HttpStatus.OK)
     }
 
-    @PostMapping("/users")
+    @PostMapping
     fun createUser(@RequestBody userRequest: UserRequest): ResponseEntity<UserResponse> {
         val user = userService.createUser(UserDto.from(userRequest))
-
         return ResponseEntity(user, HttpStatus.CREATED)
     }
-
 
 }

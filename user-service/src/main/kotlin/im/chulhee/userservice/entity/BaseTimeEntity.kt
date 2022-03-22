@@ -8,9 +8,9 @@ import javax.persistence.MappedSuperclass
 abstract class BaseTimeEntity(
 
 ) {
-    @Column(insertable = false, updatable = false)
+    @Column
     val createdAt: LocalDateTime = LocalDateTime.now()
 
-    @Column(insertable = false, updatable = false)
+    @Column
     val updatedAt: LocalDateTime = LocalDateTime.now()
 }
