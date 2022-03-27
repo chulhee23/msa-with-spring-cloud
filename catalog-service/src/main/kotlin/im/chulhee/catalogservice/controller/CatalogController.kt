@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
+import java.time.LocalDateTime1
 
 @RestController
 @RequestMapping("/catalog-service/catalogs")
@@ -26,8 +26,7 @@ class CatalogController(
     @GetMapping("/{id}")
     fun findOne(@PathVariable id: Long): ResponseEntity<CatalogResponse> {
 
-//        return ResponseEntity(catalogService.findOne(id), HttpStatus.OK)
-        return ResponseEntity(CatalogResponse("asdf", "asdf", 12L, 12L, LocalDateTime.now()), HttpStatus.OK)
+        return ResponseEntity(catalogService.findOne(id), HttpStatus.OK)
     }
 
 
